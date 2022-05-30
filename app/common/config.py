@@ -1,8 +1,10 @@
-from database import dataclass, asdict
+from dataclasses import dataclass, asdict
 from os import path, environ
+import sys
 
 # fast-api-notification을 가리키고 있다. 
 base_dir = path.dirname(path.dirname(path.dirname(path.abspath(__file__))))
+sys.path.append(base_dir)
 
 @dataclass
 class Config:
@@ -21,8 +23,6 @@ class LocalConfig(Config):
 @dataclass
 class ProdConfig(Config):
     PROJ_RELOAD: bool = False
-
-print(asdict(LocalConfig))
 
 def conf():
     '''
